@@ -23,7 +23,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{route('dashboard')}}" class="nav-link active">
+            <a href="{{route('dashboard.index')}}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -33,17 +33,33 @@
 
           </li>
           
-          <li class="nav-header">SETTINGS</li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
+          <li class="nav-header">CATEGORIES</li>
+            @foreach($categories as $category)
+              <li class="nav-item menu-close">
+                <a href="#" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    {{ $category->name }}
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  @if($category->children)
+                    @foreach($category->children as $child)
+                    <li class="nav-item">
+                      <a href="./index.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>{{ $child->name }}</p>
+                      </a>
+                    </li>
+                    @endforeach
+                  @endif
+                </ul>
+              </li>
+            @endforeach    
           </li>
-        
+          
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

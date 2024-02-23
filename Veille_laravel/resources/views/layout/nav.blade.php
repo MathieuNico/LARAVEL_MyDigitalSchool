@@ -11,7 +11,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('settings')}}" role="button">SETTINGS   <i class="fas fa-wrench"></i>
+        <a class="nav-link" href="{{route('categories.index')}}" role="button">Categories  <i class="fas fa-wrench"></i>
       </li>
     </ul>
 
