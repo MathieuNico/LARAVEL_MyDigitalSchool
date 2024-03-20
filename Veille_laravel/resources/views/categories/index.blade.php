@@ -41,6 +41,16 @@
                             <label for="recipient-name" class="col-form-label">Nom de la catégorie</label>
                             <input name="name" type="text" class="form-control" id="recipient-name">
                         </div>
+                        <div class="form-group">
+                            <label for="parent-category" class="col-form-label">Catégorie parent</label>
+                            <select name="parent_id" id="parent-category" class="form-control">
+                                <option value="">Aucun parent</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
@@ -56,14 +66,11 @@
                         <th style="width: 1%">
                             #
                         </th>
-                        <th style="width: 20%">
+                        <th style="width: 50%">
                             Nom de catégorie
                         </th>
-                        <th style="width: 30%" >
+                        <th style="width: 49%" >
                             Nom de sous dossiers
-                        </th>
-                        <th style="width: 8%" class="text-center" >
-                            Créer sous dossier
                         </th>
                         
                     </tr>
@@ -101,23 +108,25 @@
                                     <ul>
                                         @foreach($category->children as $child)
                                         <li style="list-style: none;">
-                                            <form action="{{route('categories.update', $child->id)}}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <a class="btn btn-info btn-sm btn-sousdoss"><i class="fas fa-pencil-alt"></i></a>
-                                                <input type="text" class="souscategory-name" name='name' value="{{$child->name}}" disabled>
-                                                <button type="submit" class="btn btn-success btn-sm btn-validsousdoss" hidden><i class="fas fa-check"></i></button>
-                                            </form> 
-                                            <form action="{{route('categories.index')}}" method="POST">
-                                                @csrf
-                                                @method('GET')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-cancelsousdoss" hidden><i class="fas fa-times"></i></button>                                            
-                                            </form>
-                                            <form  action="{{route('categories.destroy', $child->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-deletesousdoss"><i class="fas fa-trash"></i></a>
-                                            </form>
+                                            <div class="d-flex align-items-center">
+                                                <form action="{{route('categories.update', $child->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="text" class="souscategory-name" name='name' value="{{$child->name}}" disabled>
+                                                    <a class="btn btn-info btn-sm  btn-sousdoss"><i class="fas fa-pencil-alt"></i></a>
+                                                    <button type="submit" class="btn btn-success btn-sm btn-validsousdoss" hidden><i class="fas fa-check"></i></button>
+                                                </form> 
+                                                <form action="{{route('categories.index')}}" method="POST">
+                                                    @csrf
+                                                    @method('GET')
+                                                    <button type="submit" class="btn btn-danger btn-sm  btn-cancelsousdoss" hidden><i class="fas fa-times"></i></button>                                            
+                                                </form>
+                                                <form  action="{{route('categories.destroy', $child->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm btn-deletesousdoss"><i class="fas fa-trash"></i></a>
+                                                </form>
+                                            </div>
                                         </li> 
                                         @endforeach    
                                     </ul>
@@ -158,7 +167,6 @@
         buttonsModif.forEach((buttonModif, index) => {
             buttonModif.addEventListener("click", function(event){ 
                 event.preventDefault();
-                console.log('Doss');
                 texts[index].disabled = false;
                 buttonModif.hidden = true;
                 buttonsValid[index].hidden = false;
@@ -172,7 +180,6 @@
 
         buttonsAnnul.forEach((buttonCancel) => {
             buttonCancel.addEventListener("click", function(event){
-                event.preventDefault();
                 window.location.reload();
             });
 
@@ -181,7 +188,6 @@
         buttonsModifSousDossier.forEach((buttonModifSousDossier, index) => {
             buttonModifSousDossier.addEventListener("click", function(event){
                 event.preventDefault();
-                console.log('SousDoss');
                 buttonModifSousDossier.hidden = true;
                 textSousDossier[index].disabled = false;
                 buttonValidSousDoss[index].hidden = false;

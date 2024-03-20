@@ -25,4 +25,5 @@ class Categorie extends Model
     {
         return $this->belongsTo(Categorie::class);
     }
+
 }

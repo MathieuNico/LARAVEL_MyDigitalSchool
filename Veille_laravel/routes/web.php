@@ -30,12 +30,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'showCategory'])->name('categories.index');
     Route::put('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update'); // modifie une catégorie
-    Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('categories.show'); // affiche une catégorie
+    Route::get('/show/{id}', [CategoryController::class, 'show'])->name('categories.show'); // affiche une catégorie
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create'); // affiche le formulaire de création
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store'); // enregistre une catégorie
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit'); // affiche le formulaire d'édition
     Route::delete('/categories/{id}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy'); // supprime une catégorie
-    Route::post('/categories/{parent_id}/subcategories', [CategoryController::class, 'storeSubcategory'])->name('categories.subcategories.store');
+    Route::post('/categories/{id}/storeflux', [CategoryController::class, 'storeFlux'])->name('categories.storeflux'); // enregistre un flux
 });
 
 require __DIR__.'/auth.php';
