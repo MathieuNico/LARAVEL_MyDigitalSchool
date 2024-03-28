@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('flux')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');    
             $table->timestamps();
         });
     }
