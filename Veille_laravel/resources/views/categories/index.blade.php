@@ -5,12 +5,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1>Projects</h1>
+                <h1> Mes Catégories
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Projects</li>
+                <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Acceuil</a></li>
+                <li class="breadcrumb-item active">Catégories</li>
             </ol>
             </div>
         </div>
@@ -22,61 +22,60 @@
 
     <!-- Default box -->
         <div class="card">
-        <div class="card-header">
-            <button type="button" class="btn btn-block btn-outline-primary btn-lg" data-toggle="modal" data-target="#exampleModal" >Créer une catégorie</button>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Nom de la catégorie</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('categories.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Nom de la catégorie</label>
-                            <input name="name" type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="parent-category" class="col-form-label">Catégorie parent</label>
-                            <select name="parent_id" id="parent-category" class="form-control">
-                                <option value="">Aucun parent</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary">Créer</button>
-                    </form>
-                </div>
-                
-              </div>
+            <div class="card-header d-flex">
+                <button type="button" class="btn btn-block btn-outline-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Créer une catégorie</button>
             </div>
-        </div>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th style="width: 1%">
-                            #
-                        </th>
-                        <th style="width: 50%">
-                            Nom de catégorie
-                        </th>
-                        <th style="width: 49%" >
-                            Nom de sous dossiers
-                        </th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($categories as $category)
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nom de la catégorie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('categories.store') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Nom de la catégorie</label>
+                                <input name="name" type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="parent-category" class="col-form-label">Catégorie parent</label>
+                                <select name="parent_id" id="parent-category" class="form-control">
+                                    <option value="">Aucun parent</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Créer</button>
+                        </form>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                #
+                            </th>
+                            <th style="width: 50%">
+                                Nom de catégorie
+                            </th>
+                            <th style="width: 49%" >
+                                Nom de sous dossiers
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($categories as $category)
                             <tr>
                                 <td>
                                     {{$category->id}}
@@ -86,9 +85,9 @@
                                         <form action="{{route('categories.update', $category->id)}}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <input type="text" class="category-name" name='name' value="{{ $category->name }}" disabled>
-                                            <button type="submit" class="btn btn-success btn-sm btnvaliddoss" hidden><i class="fas fa-check"></i></button>
-                                            <a class="btn btn-info btn-sm edit-category-btn"><i class="fas fa-pencil-alt"></i></a>
+                                            <input type="text" class="ml-1 category-name" name='name' value="{{ $category->name }}" disabled style="border: none;">
+                                            <button type="submit" class="btn btn-success btn-sm btnvaliddoss mr-1" hidden><i class="fas fa-check"></i></button>
+                                            <a class="btn btn-info btn-sm edit-category-btn mr-1"><i class="fas fa-pencil-alt"></i></a>
                                         </form>
                                         <form action="{{route('categories.index')}}" method="POST">
                                             @csrf
@@ -98,28 +97,33 @@
                                         <form  action="{{route('categories.destroy', $category->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i></a>
+                                            <button type="submit" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i></button>
                                         </form>
                                     </div>
-                                   
+                                
                                 </td>
                             
                                 <td>
-                                    <ul>
+                                    <ul style="padding-left: 0;">
                                         @foreach($category->children as $child)
                                         <li style="list-style: none;">
                                             <div class="d-flex align-items-center">
                                                 <form action="{{route('categories.update', $child->id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="text" class="souscategory-name" name='name' value="{{$child->name}}" disabled>
-                                                    <a class="btn btn-info btn-sm  btn-sousdoss"><i class="fas fa-pencil-alt"></i></a>
-                                                    <button type="submit" class="btn btn-success btn-sm btn-validsousdoss" hidden><i class="fas fa-check"></i></button>
+                                                    <input type="text" class="souscategory-name" name='name' value="{{$child->name}}" disabled style="border: none;">
+                                                    <a class="btn btn-info btn-sm  btn-sousdoss mr-1"><i class="fas fa-pencil-alt"></i></a>
+                                                    <button type="submit" class="btn btn-success btn-sm btn-validsousdoss mr-1" hidden><i class="fas fa-check"></i></button>
                                                 </form> 
                                                 <form action="{{route('categories.index')}}" method="POST">
                                                     @csrf
                                                     @method('GET')
-                                                    <button type="submit" class="btn btn-danger btn-sm  btn-cancelsousdoss" hidden><i class="fas fa-times"></i></button>                                            
+                                                    <button type="submit" class="btn btn-danger btn-sm  btn-cancelsousdoss mr-1" hidden><i class="fas fa-times"></i></button>                                            
+                                                </form>
+                                                <form  action="{{route('categories.show', $child->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('GET')
+                                                    <button type="submit" class="btn btn-info btn-sm btn-show mr-1"><i class="fas fa-location-arrow"></i></a>
                                                 </form>
                                                 <form  action="{{route('categories.destroy', $child->id)}}" method="POST">
                                                     @csrf
@@ -130,17 +134,12 @@
                                         </li> 
                                         @endforeach    
                                     </ul>
-                                </td>
-                                <td class="project-state">
-
-                                
-                                </td>
+                                </td>    
                             </tr>
-                       
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         <!-- /.card-body -->
         </div>
         <!-- /.card -->

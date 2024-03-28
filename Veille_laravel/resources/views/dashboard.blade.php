@@ -6,13 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
+            <h1 class="m-0">Acceuil</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -21,26 +15,26 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6"> 
-              <div class="card-body pt-0">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </section>
-          <!-- right col -->
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-</div>
 
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-body">
+          @if (empty($items))
+              <p>Aucun flux RSS trouvé pour cette catégorie.</p>
+          @else
+            
+              @foreach ($items as $item)
+                  <div class="callout callout-info">
+                    <a class="visited-link" style="color: blue; text-decoration: none; " href="{{$item->get_permalink()}}" target="_blank"><h5>{{$item->get_title()}}</h5></a>
+                    <p>{{$item->get_date()}}</p>
+                    <p>{{strip_tags($item->get_description())}}</p>
+                  </div>
+              @endforeach
+          @endif
+        </div>
+      </div>
+    </section>
+</div>
 @endsection
 @section('scripts')
 

@@ -17,8 +17,8 @@ class Flux extends Model
         'category_id',
     ];
 
-    public function rss()
+    public function categorie()
     {
-        return $this->hasMany(Flux::class, 'category_id');
+        return $this->belongsTo(Categorie::class, 'category_id');
     }
 }
