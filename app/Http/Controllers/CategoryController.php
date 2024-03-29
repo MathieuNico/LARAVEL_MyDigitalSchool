@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Flux;
-
 use Illuminate\Http\Request;
 use SimplePie;
 
@@ -84,6 +83,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.flux');
 
     }
+
     public function create()
     {
         $parent_categories = Categorie::where('parent_id', null)->get();
